@@ -1,4 +1,4 @@
-package hello_world
+package main
 
 import (
 	"fmt"
@@ -9,14 +9,18 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	log.Print("Hello world received a request.")
-
-	fmt.Fprintf(w, "Hello world\n")
+	version := os.Getenv("VERSION")
+	if version == "" {
+		version = "v1"
+	}
+	log.Println(version)
+	fmt.Fprintf(w, "Hello world %s\n",version)
 }
 
 func main() {
 	log.Print("Hello world s`ample started.")
 
-	http.HandleFunc("/api/v1/hello", handler)
+	http.HandleFunc("/api/hello", handler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
