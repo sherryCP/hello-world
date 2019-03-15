@@ -6,15 +6,15 @@ FROM golang as builder
 WORKDIR /go/src/github.com/haseebh/hello-world
 COPY . .
 
-RUN go build -o helloworld-v1 main/helloworld-v1.go
+RUN go build -o helloworld helloworld.go
 
 # Use a Docker multi-stage build to create a lean production image.
 # https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
 FROM alpine
 
-COPY --from=builder /go/src/github.com/haseebh/hello-world-v1 /helloworld-v1
+COPY --from=builder /go/src/github.com/haseebh/hello-world/helloworld /helloworld
 
 ENV PORT 8080
 
 # Run the web service on container startup.
-CMD ["/helloworld-v1"]
+CMD ["/helloworld"]
