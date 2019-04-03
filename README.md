@@ -25,7 +25,7 @@ A simple web app written in Go that you can used for testing.
    ```shell
    kubectl apply -f helloworld-go-v1.yaml
    ```
-## Removing the sample app deployment
+## Removing the sample app deploymentt
 
 To remove the sample app from your cluster, delete the service record:
 
